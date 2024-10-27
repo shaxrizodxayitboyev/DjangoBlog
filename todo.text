@@ -1,0 +1,24 @@
+1. django-admin startproject root .
+2. python manage.py startapp blog
+3. root/setting.py
+INSTALLED_APPS = [
+    'blog'
+]
+
+4. templates/
+TEMPLATES = [
+    DIRS = [BASE_DIR / 'templates']
+]
+
+5. static/
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+6. python manage.py migrate
+7. python manage.py createsuperuser
+usernma: admin
+email: iamsolijonov@gmail.com
+password1: 1234
+password2: 1234
+
+8. python manage.py runserver

@@ -1,0 +1,76 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+<!-- NAVBAR -->
+{% include 'blog/navbar.html' %}
+{% include 'blog/create.html' %}
+
+{% block header %}
+{{ form.media }}
+{% endblock %}
+
+<!-- MODALS -->
+{% include 'blog/edit.html' %}
+{% include 'blog/delete.html' %}
+
+{% if page_obj %}
+<!-- BLOG TITLE -->
+<h3 class="container mt-3" style="margin-left: 110px;"><span
+        class="text-danger">{{ page_obj.count }} {{ blog_count }} </span> ta
+    blog topildi!</h3>
+
+<!-- BLOG BODY -->
+<div class="d-flex gap-3 p-3 flex-wrap justify-content-center">
+    {% for blog in page_obj %}
+    <div class="card border shadow" style="width: 18rem;">
+        <img style="height: 150px; object-fit: cover; object-position: center;" src="{{ blog.image.url }}"
+             class="card-img-top custom-img" alt="...">
+        <div class="card-body position-relative">
+            <h5 class="card-title">{{ blog.title | truncatechars:20 }}</h5>
+            <p class="card-text mb-5">{{ blog.description | safe | truncatechars:50 }}</p>
+
+            <div class="position-absolute bottom-0 start-0 my-3 mx-3">
+                <!-- BUTTONS -->
+                <a href="{% url 'detail' blog.id %}" class="btn btn-outline-primary">
+                    <i class="bi bi-eye"></i>
+                </a>
+
+
+                {% if user.is_authenticated %}
+                <!-- EDIT -->
+                <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editModal"
+                        data-bs-id="{{ blog.id }}"
+                        data-bs-title="{{ blog.title }}"
+                        data-bs-description="{{ blog.description }}"
+                        data-bs-image="{{ blog.image.url }}">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+
+
+                <!-- DELETE -->
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        data-bs-id="{{ blog.id }}">
+                    <i class="bi bi-trash3"></i>
+                </button>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- PAGINATION -->
+<div class="mt-3 d-flex justify-content-center align-items-center">
+    {% include 'blog/pagination.html' %}
+</div>
+{% else %}
+<div class="text-center">
+    <img src="https://t4.ftcdn.net/jpg/04/29/70/79/360_F_429707932_I5UIXsnBBBD1z4PsWmwzVbMpBWaYVKAe.jpg" alt="">
+    <h1>Hech qanday ma'lumot topilmadi!</h1>
+    <a class="btn btn-dark" href="{% url 'home-view' %}"> <i class="bi bi-arrow-bar-left"></i> Bosh sahifa</a>
+</div>
+{% endif %}
+
+{% endblock %}

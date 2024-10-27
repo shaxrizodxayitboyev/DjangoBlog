@@ -1,0 +1,55 @@
+<!-- EDIT Modal -->
+{% block header %}
+    {{ form.media }}
+{% endblock %}
+
+<div class="modal modal-xl fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{% url 'update-blog' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-warning" id="staticBackdropLabel">Postni o'zgartirish</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <input type="hidden" id="blogId" name="id">
+                    <!-- TITLE -->
+                    <div>
+                        <label for="editTitle">Sarlavha:</label>
+                        <input type="text" name="title" id="editTitle" class="form-control">
+                    </div>
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="ck-editor-container">
+                        <label for="editDescription">Tafsif:</label>
+                        <textarea name="description" id="editDescription" class="form-control django_ckeditor_5"
+                                  rows="7"></textarea>
+                        <span class="word-count" id="id_text_script-word-count"></span>
+                    </div>
+
+                    <!-- EDIT IMAGE -->
+                    <div>
+                        <label for="editImage">Rasm:</label>
+                        <input type="file" name="image" id="editImage" class="form-control">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                    <button type="submit" class="btn btn-primary btn btn-warning">O'zgartirish</button>
+                </div>
+                <!-- CKEditor -->
+                <input type="hidden" id="id_text_script-ck-editor-5-upload-url"
+                       data-upload-url="/ckeditor5/image_upload/" data-csrf_cookie_name="new_csrf_cookie_name">
+                <span id="id_text_script-span">
+                    <script id="id_text_script" type="application/json">{your ckeditor config}</script>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>

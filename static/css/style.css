@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+blockquote {
+    background: rgba(192, 192, 192, 0.16) !important;
+    padding: 10px!important;
+    border-left: 5px solid silver!important;
+}
+
+blockquote p {
+    margin: 0!important;
+    font-family: 'Monaco', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    color: #a3a1a1;
+}
+
+.custom-img {
+    max-width: 300px;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+pre {
+    background: rgba(0, 0, 0, 0.8);
+    font-family: 'Monaco', sans-serif;
+    color: white;
+    padding: 30px 10px;
+    font-size: 14px;
+
+}
+
+
+body {
+  font-family: "Source Sans 3", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
